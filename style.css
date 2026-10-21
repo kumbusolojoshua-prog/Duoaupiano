@@ -1,0 +1,120 @@
+
+
+:root {
+    --color-blue: #30277e;       /* Bleu nuit */
+    --color-navy-dark: #0d1626;  /* Bleu */
+    --color-orange: #ee7219;     /* Orange de Habitat & Humanisme */
+    --color-cyan: #009fe3;       /* Cyan officiel */
+    --color-beige: #f8eee3;      /* Beige */
+    --color-white: #ffffff;      /* Blanc  */
+}
+
+/* Base du site */
+body {
+    font-family: 'Montserrat', 'Plus Jakarta Sans', sans-serif;
+    background-color: var(--color-navy-dark);
+    color: var(--color-white);
+    overflow-x: hidden;
+}
+
+/* --- FIX CONTRASTE SUR CARTES BLANCHES / BEIGES --- */
+.bg-white, .roof-card, [class*="bg-white"] {
+    background-color: var(--color-beige) !important;
+    color: var(--color-blue) !important;
+}
+
+.bg-white h1, .bg-white h2, .bg-white h3, .bg-white h4, .bg-white h5, .bg-white h6,
+.bg-white p, .bg-white span, .bg-white div, .bg-white li,
+.roof-card h1, .roof-card h2, .roof-card h3, .roof-card h4, .roof-card p, .roof-card span {
+    color: var(--color-blue) !important;
+}
+
+/* Formes de toits */
+.roof-card {
+    clip-path: polygon(50% 0%, 100% 12%, 100% 100%, 0% 100%, 0% 12%);
+}
+
+.roof-card-header {
+    clip-path: polygon(50% 0%, 100% 25%, 100% 100%, 0% 100%, 0% 25%);
+}
+
+/* Encadrés transparents */
+.border-white-contrast {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* ================================================================= */
+/* LE PIANO DES TOITS - CLAVIER VIRTUEL                              */
+/* ================================================================= */
+
+.piano-container {
+    user-select: none;
+    -webkit-user-select: none;
+    min-height: 200px; /* S'assure que l'espace du clavier reste visible */
+}
+
+#piano-keyboard {
+    position: relative;
+    display: inline-flex;
+    align-items: flex-start;
+}
+
+.white-key {
+    background: linear-gradient(180deg, #ffffff 0%, #f4f1ea 100%);
+    border: 1px solid #cbd5e1;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), inset 0 -3px 0 #d1d5db;
+    transition: all 0.15s ease;
+    cursor: pointer;
+}
+
+.white-key.lit {
+    background: linear-gradient(180deg, #ffd53d 0%, #ee7219 100%) !important;
+    border-color: #ee7219 !important;
+    box-shadow: 0 0 15px rgba(238, 114, 25, 0.8), inset 0 -3px 0 #c25e0f !important;
+}
+
+.white-key:active, .white-key.active {
+    transform: translateY(2px);
+    background: linear-gradient(180deg, #e2e8f0 0%, #cbd5e1 100%);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.black-key {
+    background: linear-gradient(180deg, #334155 0%, #0f172a 100%);
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    box-shadow: 2px 4px 8px rgba(0,0,0,0.4), inset 0 -2px 0 #000;
+    transition: all 0.15s ease;
+    z-index: 10;
+    cursor: pointer;
+}
+
+.black-key.lit {
+    background: linear-gradient(180deg, #ee7219 0%, #c25e0f 100%) !important;
+    box-shadow: 0 0 12px rgba(238, 114, 25, 0.9), inset 0 -2px 0 #7c2d12 !important;
+}
+
+.black-key:active, .black-key.active {
+    transform: translateY(2px);
+    background: #000;
+}
+
+/* Scrollbar du piano */
+.piano-scroll::-webkit-scrollbar {
+    height: 8px;
+}
+.piano-scroll::-webkit-scrollbar-track {
+    background: var(--color-blue);
+    border-radius: 4px;
+}
+.piano-scroll::-webkit-scrollbar-thumb {
+    background: var(--color-orange);
+    border-radius: 4px;
+}
+
+.glow-effect {
+    box-shadow: 0 0 25px -5px rgba(238, 114, 25, 0.4);
+}
