@@ -99,27 +99,39 @@ function renderPiano() {
 function triggerKey(index, el) {
     el.classList.add('active');
     setTimeout(() => el.classList.remove('active'), 200);
+if (noteType === 'w') {
+            const key = document.createElement('div');
+            key.className = `white-key relative w-7 sm:w-10 h-44 sm:h-60 flex-shrink-0 cursor-pointer ${isLit ? 'lit' : ''}`;
+            key.dataset.index = i;
+            
+            if (isLit) {
+                key.innerHTML = `<div class="absolute bottom-3 left-1/2 -translate-x-1/2 text-orange-800 text-[10px] font-bold"><i class="fa-solid fa-house"></i></div>`;
+            }
 
-    const freq = getKeyFrequency(index);
-    playNoteFrequency(freq);
+            // Utilisation de pointerdown pour gérer à la fois la souris et le tactile de manière fluide
+            key.addEventListener('pointerdown', (e) => {
+                e.preventDefault();
+                triggerKey(i, key);
+            });
 
-    if (!el.classList.contains('lit')) {
-        el.classList.add('lit');
-        litKeysCount = Math.min(88, litKeysCount + 1);
-        updateCounter();
-    }
-}
+            pianoEl.appendChild(key);
+            whiteKeyOffset++;
+        } else {
+            const key = document.createElement('div');
+            key.className = `black-key absolute w-4 sm:w-6 h-28 sm:h-36 cursor-pointer z-20 ${isLit ? 'lit' : ''}`;
 
-// Update progress counter
-function updateCounter() {
-    const counterEl = document.getElementById('lit-count');
-    const progressEl = document.getElementById('piano-progress');
-    if (counterEl) counterEl.innerText = litKeysCount;
-    if (progressEl) {
-        const percentage = (litKeysCount / totalKeys) * 100;
-        progressEl.style.width = `${percentage}%`;
-    }
-}
+            const leftPos = (whiteKeyOffset - 1) * whiteKeyWidth + blackKeyOffset;
+            key.style.left = `${leftPos}px`;
+            key.dataset.index = i;
+
+            key.addEventListener('pointerdown', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                triggerKey(i, key);
+            });
+
+            pianoEl.appendChild(key);
+        }
 
 // Audio toggle
 function toggleAudio() {
