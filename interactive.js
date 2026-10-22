@@ -131,7 +131,7 @@ if (noteType === 'w') {
             });
 
             pianoEl.appendChild(key);
-        }
+        }}
 
 // Audio toggle
 function toggleAudio() {
